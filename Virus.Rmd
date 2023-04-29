@@ -1,0 +1,43 @@
+---
+title: "Analisis del virus del dengue"
+author: "Jorge Alejandro González Díaz"
+date: "2023-04-25"
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r}
+# Instalar paquetes
+#install.packages("seqinr")
+library(seqinr)
+```
+
+### Directorio de trabajo
+
+```{r}
+setwd("/Users/jorgl/OneDrive/Escritorio")
+dengueSUB120A <- read.fasta("Dengue.fasta")  # Crear un objeto custom tipo dengueSub
+dengueSUB120A
+
+length(dengueSUB120A[[1]])    #Imprimir el tamaño de la secuencia
+count(dengueSUB120A[[1]], 1)  #Obtener la composicion de nucleotidos en la secuencia
+count(dengueSUB120A[[1]], 2)  #Para conocer la secuencia de nucleotidos
+```
+
+
+```{r}
+setwd("/Users/jorgl/OneDrive/Escritorio")
+dengueSUB098A <- read.fasta("SUB-098a.fasta")
+
+compara <- function(seq1, seq2){
+  par(mfrow=c(1,2))
+  barplot(table(seq1), col=1:4)
+  barplot(table(seq2), col=1:4)
+}
+```
+
+Ahora, una comparacion entre los elementos de las secuencias de 2 variantes de dengue
+```{r}
+compara(dengueSUB120A, dengueSUB098A) #Llamar a funcion pasando las 2 secuencias del dengue como parametros
+```

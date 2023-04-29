@@ -1,0 +1,193 @@
+---
+title: "Analisis de secuencias de virus"
+output:
+  html_document:
+    df_print: paged
+---
+Equipo: Jorge, Roberto, Michel
+
+### Incluir librerías necesarias
+Este chunk sirve para importar la libreria seqinr
+
+```{r}
+# Instalar paquetes
+#install.packages("seqinr")
+library(seqinr)
+```
+
+Importación de datos al script y creacion de variables
+
+```{r}
+setwd("/Users/jorgl/OneDrive/Escritorio")
+zika <- read.fasta("Zika.fasta")  
+middleEast <- read.fasta("middleeast_syndrome.fasta")
+wuhan<-read.fasta("pneumonia.fasta")
+coronavirus<-read.fasta("coronavirus.fna")
+dengue <- read.fasta("Dengue.fasta")
+```
+
+**Pregunta 1**
+¿Cuál es el tamaño de cada secuencia? <br>
+**a) Tamaño de secuencia de Zika**
+
+```{r}
+length(zika[[1]])
+```
+**b) Tamaño de secuencia de Middle East respiratory syndrome coronavirus**
+
+```{r}
+length(middleEast[[1]])
+```
+**c) Tamaño de secuencia de Wuhan pneumonia**
+
+```{r}
+length(wuhan[[1]])
+```
+**d) Tamaño de secuencia de SARS Cov**
+
+```{r}
+length(coronavirus[[1]])
+```
+
+**e) Tamaño de secuencia de dengue**
+
+```{r}
+length(dengue[[1]])
+```
+
+**Pregunta 2**
+¿Cúal es la composición de nucleótidos de cada secuencia? <br>
+**a) Virus Zika**
+
+```{r}
+  count(zika[[1]], 1)
+```
+
+b) **Middle East respiratory syndrome coronavirus**
+
+```{r}
+  count(middleEast[[1]], 1)
+```
+
+c) **Wuhan pneumonia**
+
+```{r}
+  count(wuhan[[1]], 1)
+```
+
+d) **SARS COV**
+
+```{r}
+  count(coronavirus[[1]], 1)
+```
+
+e) **Dengue**
+
+```{r}
+  count(dengue[[1]], 1)
+```
+
+<br>
+**Pregunta 3**
+¿Cuál es el contenido de GC de cada virus? <br>
+**a) Virus Zika**
+
+```{r}
+seq1 <- read.fasta("Zika.fasta")[[1]] #Es necesario convertir a vector de chars
+seq1Gc <- GC(seq1) #Funcion predeterminada para calcular el contenido GC de un seq
+seq1Gc
+```
+
+**b) Middle East respiratory syndrome coronavirus**
+
+```{r}
+seq2 <- read.fasta("middleeast_syndrome.fasta")[[1]] #Es necesario convertir a vector de chars
+seq2Gc <- GC(seq2) #Funcion predeterminada para calcular el contenido GC de un seq
+seq2Gc
+```
+**c) Wuhan pneumonia**
+
+```{r}
+seq3 <- read.fasta("pneumonia.fasta")[[1]] #Es necesario convertir a vector de chars
+seq3Gc <- GC(seq3) #Funcion predeterminada para calcular el contenido GC de un seq
+seq3Gc
+```
+**d) SARS COV**
+
+```{r}
+seq4 <- read.fasta("coronavirus.fna")[[1]] #Es necesario convertir a vector de chars
+seq4Gc <- GC(seq4) #Funcion predeterminada para calcular el contenido GC de un seq
+seq4Gc
+```
+
+**e) Dengue**
+
+```{r}
+seq5 <- read.fasta("Dengue.fasta")[[1]] #Es necesario convertir a vector de chars
+seq5Gc <- GC(seq5) #Funcion predeterminada para calcular el contenido GC de un seq
+seq5Gc
+```
+
+<br>
+**Pregunta 4**
+Funcion para encontrar secuencias complementarias <br>
+```{r}
+complementaria <- function(seq){
+  seqC = character(0)
+  for(i in seq){ # Iterar en la secuencia y reemplazar valores por sus complementarios en un nuevo vector
+    if(i == "c"){
+      seqC <- c(seqC, "g")
+    }else if (i == "a"){
+      seqC <- c(seqC, "t")
+    } else if (i == "g"){
+      seqC <- c(seqC, "c")
+    }else{
+      seqC <- c(seqC, "a")
+    }
+    
+  }
+  return(seqC)
+}
+```
+
+**a) Virus Zika**
+```{r}
+complementaria(seq1)
+```
+
+**b) Virus Middle East**
+```{r}
+complementaria(seq2)
+```
+**c) Wuhan pneumonia**
+```{r}
+complementaria(seq3)
+```
+**d) SARS COV**
+```{r}
+complementaria(seq4)
+```
+**e) Dengue**
+```{r}
+complementaria(seq5)
+```
+
+**Pregunta 5**
+¿Cuál es el contenido de GC de cada virus? <br>
+Ahora, una comparacion entre los elementos de las secuencias de estos virus
+
+```{r}
+
+compara <- function(seq1, seq2, seq3, seq4, seq5){
+  par(mfrow=c(1,2))
+  barplot(table(seq1), col=1:4)
+  barplot(table(seq2), col=1:4)
+  barplot(table(seq3), col=1:4)
+  barplot(table(seq4), col=1:4)
+  barplot(table(seq5), col=1:4)
+}
+```
+Orden: Zika, middle east, wuhan pnemonia, sars cov, dengue
+```{r}
+compara(seq1, seq2, seq3, seq4, seq5)
+```
