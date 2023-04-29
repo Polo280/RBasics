@@ -1,0 +1,22 @@
+---
+title: "Virus"
+author: "Jorge González Díaz"
+date: "2023-04-25"
+output:
+  html_document:
+    df_print: paged
+---
+
+# Primero hay que instalar paquetes
+```{r}
+install.packages("seqinr")
+libary(seqinr)
+```
+
+Directorio de trabajo
+
+```{r}
+setwd("C:/Users/jorgl/OneDrive/Documentos")
+dengueSUB120A <- read.fasta("Dengue.fasta")  # Crear un objeto custom tipo dengueSub
+dengueSUB120A
+```

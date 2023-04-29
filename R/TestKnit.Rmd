@@ -1,0 +1,53 @@
+---
+title: "PruebaViernes"
+author: "Jorge González Díaz"
+date: "2023-04-14"
+output:
+  html_document:
+    df_print: paged
+---
+
+# Mi titulo principal
+Seccion principal pro
+
+## Subtitulo
+Subtitulo chido
+
+### Sub_subtitulo
+Hola soy Jorge 
+
+Esto es una formula en latex $x_i = \alpha * y^2$
+
+```{r echo=FALSE}
+  boxplot(iris$Sepal.Length)
+```
+
+```{r include=FALSE}
+x <- "Hola"
+x
+```
+
+Codigo dentro de texto: 2 + 2 = `r2 + 2`
+x = `r x`
+
+### Tablas
+```{r}
+head(mtcars)
+```
+
+```{r}
+library(knitr)
+kable(head(mtcars), caption = "Mi base de datos.")
+```
+
+# Listas
+- uno
+- dos 
+- tres
+
+# Listas ordenadas 
+1. elemento 1
+2. elemento 2
+3. elemento 3
+
+![A custom image.](miplot.png){width="50%"}
